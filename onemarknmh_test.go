@@ -19,7 +19,7 @@ func TestHello(t *testing.T) {
 	actual := getReply(msg)
 
 	if !bytes.Equal([]byte(actual), []byte(expected)) {
-		t.Errorf("Expected receive for %q is %q but got %q", msg, expected, actual)
+		t.Errorf("Expected for %q is %q but got %q", msg, expected, actual)
 		t.Fail()
 	}
 }
@@ -33,7 +33,7 @@ func TestApiUrl(t *testing.T) {
 	actual := getReply(msg)
 
 	if !bytes.Equal([]byte(actual), []byte(expected)) {
-		t.Errorf("Expected receive for %q is %q (%v) but got %q (%v)", msg, expected, len(expected), actual, len(actual))
+		t.Errorf("Expected for %q is %q (%v) but got %q (%v)", msg, expected, len(expected), actual, len(actual))
 		t.Fail()
 	}
 }

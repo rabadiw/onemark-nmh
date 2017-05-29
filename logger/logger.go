@@ -40,36 +40,42 @@ func (l LogLevel) String() string { return logNames[l-1] }
 func init() {
 	level, err := env.GetEnvValue("LOG_LEVEL")
 	if err != nil {
-		LogError(err.Error())
-		return
+		log(err.Error(), ERROR)
 	}
 
 	switch strings.ToUpper(level) {
-	case INFO.String():
-		logLevel = INFO
 	case WARN.String():
 		logLevel = WARN
 	case ERROR.String():
 		logLevel = ERROR
-	default:
+	case NONE.String():
 		logLevel = NONE
+	default:
+		logLevel = INFO
 	}
-
-	fmt.Println(level)
 }
 
 // LogInfo logs a given msg into a file for LOG_LEVEL of Info+
 func LogInfo(msg string) {
+	if logLevel != INFO || logLevel == NONE {
+		return
+	}
 	log(msg, INFO)
 }
 
 // LogWarn logs a given msg for LOG_LEVEL of Warn+
 func LogWarn(msg string) {
+	if logLevel != WARN || logLevel == NONE {
+		return
+	}
 	log(msg, WARN)
 }
 
 // LogError logs a given msg for LOG_LEVEL of Error+
 func LogError(msg string) {
+	if logLevel != ERROR || logLevel == NONE {
+		return
+	}
 	log(msg, ERROR)
 }
 
