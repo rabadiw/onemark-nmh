@@ -10,7 +10,9 @@ import (
 	"time"
 )
 
-func TestIn(t *testing.T) {
+func TestHello(t *testing.T) {
+	fmt.Println("Testing Hello")
+
 	msg := "{\"Text\":\"Hi\"}"
 	expected := "{\"Text\":\"Hello!\"}"
 
@@ -23,6 +25,8 @@ func TestIn(t *testing.T) {
 }
 
 func TestApiUrl(t *testing.T) {
+	fmt.Println("Testing TestApiUrl")
+
 	msg := "{\"Text\":\"--APIURL\"}"
 	expected := "{\"Text\":\"http://localhost:3010/api/\"}"
 

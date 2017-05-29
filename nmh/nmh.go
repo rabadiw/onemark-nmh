@@ -7,6 +7,8 @@ import (
 	"encoding/json"
 	"os"
 	"strings"
+
+	"github.com/rabadiw/onemark-nmh/env"
 )
 
 // Message type model for in/out communication
@@ -41,7 +43,7 @@ func echoMessage(msg []byte) {
 	if content == "hi" {
 		Send("Hello!")
 	} else if content == "--apiurl" {
-		v := GetEnvValue("ONEMARK_API_URL")
+		v, _ := env.GetEnvValue("ONEMARK_API_URL")
 		Send(v)
 	} else {
 		Send(content)
