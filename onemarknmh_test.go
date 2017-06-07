@@ -38,8 +38,23 @@ func TestApiUrl(t *testing.T) {
 	}
 }
 
+func TestEnvParam(t *testing.T) {
+	fmt.Println("Testing TestEnvParam")
+
+	// results can be checked in log file
+	_, err := exec.Command("go", "run", "onemarknmh.go", "-env", "../.env").Output()
+	if err != nil {
+		fmt.Printf("%s", err)
+	}
+
+	_, err = exec.Command("go", "run", "onemarknmh.go", "-env", ".env").Output()
+	if err != nil {
+		fmt.Printf("%s", err)
+	}
+}
+
 func getReply(msg string) string {
-	cmd := exec.Command("go", "run", "./onemarknmh.go")
+	cmd := exec.Command("go", "run", "onemarknmh.go")
 
 	stdin, err := cmd.StdinPipe()
 	if err != nil {

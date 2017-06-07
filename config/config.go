@@ -1,10 +1,8 @@
-package env
+package config
 
 import (
 	"errors"
 	"os"
-
-	"github.com/rabadiw/onemark-nmh/config"
 
 	"bufio"
 	"strings"
@@ -13,24 +11,29 @@ import (
 var envFilename string
 
 func init() {
-	envFilename = config.GetEnvPath()
+	envFilename = ".env"
+}
+
+// SetEnvPath sets the env file path to specified value
+func SetEnvPath(f string) {
+	envFilename = f
 }
 
 // GetLogLevel gets the Log_Level set in .env file
 func GetLogLevel() string {
-	v, _ := GetEnvValue("LOG_LEVEL")
+	v, _ := getEnvValue("LOG_LEVEL")
 	return v
 }
 
 // GetEnvPath gets the ENV_PATH set in .env file
 func GetEnvPath() string {
-	v, _ := GetEnvValue("ENV_PATH")
+	v, _ := getEnvValue("ENV_PATH")
 	return v
 }
 
 // GetEnvValue returns the value of a given key from the .env file
 // with default location of the executing app
-func GetEnvValue(key string) (string, error) {
+func getEnvValue(key string) (string, error) {
 	//envFilename := ".env"
 	f, err := os.OpenFile(envFilename, os.O_RDONLY, 0600)
 	if err != nil {

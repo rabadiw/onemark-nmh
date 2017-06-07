@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/rabadiw/onemark-nmh/env"
+	"github.com/rabadiw/onemark-nmh/config"
 )
 
 // LogLevel type of log
@@ -38,10 +38,7 @@ var logNames = [...]string{
 func (l LogLevel) String() string { return logNames[l-1] }
 
 func init() {
-	level, err := env.GetEnvValue("LOG_LEVEL")
-	if err != nil {
-		log(err.Error(), ERROR)
-	}
+	level := config.GetLogLevel()
 
 	switch strings.ToUpper(level) {
 	case WARN.String():
